@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 
 const PlayerInfo: React.FC = () => {
-  const { id } = useParams();
-  return <div>Player Info {id}</div>;
+  const { name } = useParams();
+  return <div>Player Info {name}</div>;
 };
 
 export default PlayerInfo;
