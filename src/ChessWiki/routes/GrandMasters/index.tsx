@@ -5,12 +5,12 @@ import { Table, Spin } from "antd";
 import { Link } from "react-router-dom";
 
 const GrandMasters: React.FC = () => {
-  const [players, setPlayers] = useState<PlayersType[]>();
+  const [players, setPlayers] = useState<{ key: number; name: string }[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     Players.getPlayers()
-      .then((data: PlayersType[]) => {
+      .then((data: PlayersType) => {
         const formattedData = data.players.map(
           (username: string, index: number) => ({
             key: index,
