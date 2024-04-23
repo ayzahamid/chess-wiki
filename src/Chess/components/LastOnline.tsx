@@ -28,7 +28,7 @@ const OnlineStatus: React.FC<{ lastOnlineTime: number | undefined }> = ({
     const minutes = Math.floor((secondsAgo % 3600) / 60);
     const seconds = secondsAgo % 60;
 
-    return `${hours}h ${minutes}m ${seconds}s`;
+    return `${hours}h ${minutes}m ${seconds}s ago`;
   };
 
   return <div>Last online: {formatTimeDifference(lastOnlineTime)}</div>;

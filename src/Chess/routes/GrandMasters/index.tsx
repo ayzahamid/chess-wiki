@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PlayersType from "../../interfaces/players";
-import { Players } from "../../api/api";
+import { Players } from "../../api/chessApi";
 import { Table, Spin } from "antd";
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const GrandMasters: React.FC = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <Link to={`/${text}`}>{text}</Link>,
+      render: (text: string) => <Link to={`player/${text}`}>{text}</Link>,
     },
   ];
 

@@ -8,7 +8,7 @@ const routes = [
     component: GrandMasters as FC,
   },
   {
-    path: "/:name",
+    path: "player/:name",
     component: PlayerInfo as FC,
   },
 ];

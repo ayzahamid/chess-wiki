@@ -1,43 +1,46 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Players } from "../../api/api";
+import { useParams } from "react-router-dom";
+import { Players } from "../../api/chessApi";
 import ProfileType from "../../interfaces/profile";
+import CountryType from "../../interfaces/country";
 import { Card, Skeleton, Avatar, Typography } from "antd";
 import OnlineStatus from "../../components/LastOnline";
-import CountryType from "../../interfaces/country";
 
 const { Title, Text } = Typography;
 
 const PlayerInfo: React.FC = () => {
   const { name } = useParams();
-  const [profile, setProfile] = useState<ProfileType>();
+  const [profile, setProfile] = useState<ProfileType | null>(null);
+  const [country, setCountry] = useState<CountryType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [country, setCountry] = useState<CountryType>();
 
   useEffect(() => {
-    Players.getSinglePlayerInfo(name)
-      .then((data: ProfileType) => {
-        setProfile(data);
-        const url = data.country;
+    const fetchData = async () => {
+      try {
+        const playerData = await Players.getSinglePlayerInfo(name);
+        setProfile(playerData);
+
+        const url = playerData.country;
         const parts = url.split("/");
         const lastPart = parts[parts.length - 1];
-        Players.getCountry(lastPart).then((data: CountryType) => {
-          setCountry(data);
-        });
-      })
-      .catch((err: Error) => {
+        const countryData = await Players.getCountry(lastPart);
+        setCountry(countryData);
+      } catch (err) {
         console.log("Error", err);
-      })
-      .finally(() => {
+      } finally {
         setIsLoading(false);
-      });
-  });
+      }
+    };
 
-  return isLoading ? (
-    <Skeleton active />
-  ) : (
+    fetchData();
+  }, [name]);
+
+  if (isLoading) {
+    return <Skeleton active />;
+  }
+
+  return (
     <div>
-      <Link to={"/"}>Home</Link>
       <OnlineStatus lastOnlineTime={profile?.last_online} />
       <Card
         style={{ width: "auto", margin: "20px auto" }}
@@ -45,7 +48,7 @@ const PlayerInfo: React.FC = () => {
       >
         <Card.Meta
           title={
-            <Title level={4}>
+            <Title level={5}>
               {profile?.username} ({profile?.name})
             </Title>
           }
