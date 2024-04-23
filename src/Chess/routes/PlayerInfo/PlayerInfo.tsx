@@ -14,6 +14,7 @@ const PlayerInfo: React.FC = () => {
   const [profile, setProfile] = useState<ProfileType | null>(null);
   const [country, setCountry] = useState<CountryType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const joinedDate = profile?.joined ? new Date(profile.joined * 1000).toDateString() : null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +44,14 @@ const PlayerInfo: React.FC = () => {
     </div>
     <Card
         style={{ width: "auto", margin: "20px auto" }}
-        cover={<Avatar className="card-avatar" size={100} src={profile?.avatar? profile.avatar : 'public/avatar.png'} />}
+        cover={<Avatar className="card-avatar" size={100} src={profile?.avatar} />}
 
         loading={isLoading}
       >
         <Card.Meta
           title={
             <Title level={5}>
-              {profile?.username} ({profile?.name})
+              {profile?.username} ({profile?.name? profile.name : 'Not Available'})
             </Title>
           }
           description={
@@ -65,7 +66,7 @@ const PlayerInfo: React.FC = () => {
                 <Text strong>Country:</Text> {country?.name}
               </div>
               <div>
-                <Text strong>Joined:</Text> {profile?.joined}
+                <Text strong>Joined:</Text> {joinedDate}
               </div>
               <div>
                 <Text strong>Status:</Text> {profile?.status}

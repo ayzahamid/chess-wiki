@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 
 const App: React.FC = () => {
   return (
-    <Layout>
+    <Layout image="logo.png">
       <Router>
         <Routes>
           {routes.map((route, index) => (

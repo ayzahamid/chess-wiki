@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import GrandMasters from "./GrandMasters";
-import PlayerInfo from "./PlayerInfo";
+import GrandMasters from "./GrandMasters/GrandMasters";
+import PlayerInfo from "./PlayerInfo/PlayerInfo";
 
 const routes = [
   {
