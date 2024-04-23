@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { Players } from "../../api/chessApi";
 import ProfileType from "../../interfaces/profile";
 import CountryType from "../../interfaces/country";
-import { Card, Skeleton, Avatar, Typography } from "antd";
+import { Card, Avatar, Typography } from "antd";
 import OnlineStatus from "../../components/LastOnline";
+import './styles.less'
 
 const { Title, Text } = Typography;
 
@@ -35,16 +36,16 @@ const PlayerInfo: React.FC = () => {
     fetchData();
   }, [name]);
 
-  if (isLoading) {
-    return <Skeleton active />;
-  }
-
   return (
-    <div>
-      <OnlineStatus lastOnlineTime={profile?.last_online} />
-      <Card
+    <>
+    <div className="lastOnline">
+        <OnlineStatus lastOnlineTime={profile?.last_online} />
+    </div>
+    <Card
         style={{ width: "auto", margin: "20px auto" }}
-        cover={<Avatar size={100} src={profile?.avatar} />}
+        cover={<Avatar className="card-avatar" size={100} src={profile?.avatar? profile.avatar : 'public/avatar.png'} />}
+
+        loading={isLoading}
       >
         <Card.Meta
           title={
@@ -53,31 +54,41 @@ const PlayerInfo: React.FC = () => {
             </Title>
           }
           description={
-            <div>
-              <Text strong>Player ID:</Text> {profile?.player_id}
-              <br />
-              <Text strong>Followers:</Text> {profile?.followers}
-              <br />
-              <Text strong>Country:</Text> {country?.name}
-              <br />
-              <Text strong>Joined:</Text> {profile?.joined}
-              <br />
-              <Text strong>Status:</Text> {profile?.status}
-              <br />
-              <Text strong>Streamer:</Text>{" "}
+            <div className="card-meta-description">
+              <div>
+                <Text strong>Player ID:</Text> {profile?.player_id}
+              </div>
+              <div>
+                <Text strong>Followers:</Text> {profile?.followers}
+              </div>
+              <div>
+                <Text strong>Country:</Text> {country?.name}
+              </div>
+              <div>
+                <Text strong>Joined:</Text> {profile?.joined}
+              </div>
+              <div>
+                <Text strong>Status:</Text> {profile?.status}
+              </div>
+              <div>
+                <Text strong>Streamer:</Text>{" "}
               {profile?.is_streamer ? "Yes" : "No"}
-              <br />
-              <Text strong>Verified:</Text> {profile?.verified ? "Yes" : "No"}
-              <br />
-              <Text strong>League:</Text> {profile?.league}
-              <br />
-              <Text strong>Streaming Platforms:</Text>{" "}
-              {profile?.streaming_platforms}
+              </div>
+              <div>
+                <Text strong>Verified:</Text> {profile?.verified ? "Yes" : "No"}
+              </div>
+              <div>
+                <Text strong>League:</Text> {profile?.league? profile.league : 'Not Available'}
+              </div>
+              <div>
+                <Text strong>Streaming Platforms:</Text>{" "}
+                {profile?.streaming_platforms}
+              </div>
             </div>
           }
         />
       </Card>
-    </div>
+    </>
   );
 };
 

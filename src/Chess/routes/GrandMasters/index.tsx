@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import PlayersType from "../../interfaces/players";
 import { Players } from "../../api/chessApi";
-import { Table, Spin } from "antd";
+import { Table, Spin, Typography } from "antd";
 import { Link } from "react-router-dom";
+import './styles.less'
+const { Title } = Typography;
 
 const GrandMasters: React.FC = () => {
   const [players, setPlayers] = useState<{ key: number; name: string }[]>();
@@ -29,16 +31,16 @@ const GrandMasters: React.FC = () => {
 
   const columns = [
     {
-      title: "Name",
+      title: "Names",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <Link to={`player/${text}`}>{text}</Link>,
+      render: (text: string) => <Link className="playerLinks" to={`player/${text}`}>{text}</Link>,
     },
   ];
 
   return (
     <>
-      <div>GrandMaster</div>
+      <Title className="grandMaster">Grand Masters</Title>
       <Table
         dataSource={players}
         columns={columns}
