@@ -3,16 +3,12 @@ import "./Header.less";
 import { Typography } from "antd";
 const { Title } = Typography;
 
-interface HeaderProps {
-  image: string
-}
-
-const Header: React.FC<HeaderProps>= ({image}) => {
+const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <a href="/"><img src={image} className="logo"/></a>
-      <Title>Chess Wikipedia</Title>
+      <a href="/"><img src='/logo.png' alt="Header" className="logo" /></a>
+      <Title className="title">Chess Wikipedia</Title>
     </header>
   );
 };

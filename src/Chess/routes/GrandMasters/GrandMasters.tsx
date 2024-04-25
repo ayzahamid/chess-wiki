@@ -58,7 +58,7 @@ const GrandMasters: React.FC<DataType> = () => {
 
   return (
     <>
-      <Title className="grandMaster">Grand Masters</Title>
+      <Title className="grandMasterTitle">Grand Masters</Title>
       <Input.Search
         placeholder="Search for a player"
         value={searchTerm}

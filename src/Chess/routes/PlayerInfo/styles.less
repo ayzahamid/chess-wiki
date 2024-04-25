@@ -1,25 +1,25 @@
 .lastOnline {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: right;
+  position: relative;
+  float: right;
+  position: "absolute";
+  top: 10;
+  right: 10;
 }
-.card-meta-description {
-  margin-top: 16px;
-  line-height: 1.5;
-  display: flex;
-  flex-wrap:wrap;
-  flex-direction: row;
-  > div {
-    flex-wrap:wrap;
-    flex-direction: row;
-    flex-grow: 2;
-  }
-}
-
 .card-avatar {
   display: inline;
   margin-left: 36px;
   margin-top: 20px;
+}
+@media screen and (max-width: 768px) {
+  .lastOnline {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .lastOnline {
+    font-size: 10px;
+  }
 }

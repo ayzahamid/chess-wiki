@@ -2,13 +2,12 @@ import Header from "./Header";
 
 interface LayoutProps {
   children: React.ReactNode;
-  image: string
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, image }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="container">
-      <Header image = {image} />
+      <Header/>
       <div className="main">
         {children}
       </div>

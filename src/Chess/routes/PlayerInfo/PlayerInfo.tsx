@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { Players } from "../../api/chessApi";
 import ProfileType from "../../interfaces/profile";
 import CountryType from "../../interfaces/country";
-import { Card, Avatar, Typography } from "antd";
+import { Card, Avatar, Typography, Row, Col } from "antd";
 import OnlineStatus from "../../components/LastOnline";
-import './styles.less'
+import './styles.less';
 
 const { Title, Text } = Typography;
 
@@ -39,56 +39,59 @@ const PlayerInfo: React.FC = () => {
 
   return (
     <>
-    <div className="lastOnline">
-        <OnlineStatus lastOnlineTime={profile?.last_online} />
-    </div>
-    <Card
-        style={{ width: "auto", margin: "20px auto" }}
-        cover={<Avatar className="card-avatar" size={100} src={profile?.avatar} />}
-
-        loading={isLoading}
-      >
-        <Card.Meta
-          title={
-            <Title level={5}>
-              {profile?.username} ({profile?.name? profile.name : 'Not Available'})
-            </Title>
-          }
-          description={
-            <div className="card-meta-description">
-              <div>
-                <Text strong>Player ID:</Text> {profile?.player_id}
-              </div>
-              <div>
-                <Text strong>Followers:</Text> {profile?.followers}
-              </div>
-              <div>
-                <Text strong>Country:</Text> {country?.name}
-              </div>
-              <div>
-                <Text strong>Joined:</Text> {joinedDate}
-              </div>
-              <div>
-                <Text strong>Status:</Text> {profile?.status}
-              </div>
-              <div>
-                <Text strong>Streamer:</Text>{" "}
-              {profile?.is_streamer ? "Yes" : "No"}
-              </div>
-              <div>
-                <Text strong>Verified:</Text> {profile?.verified ? "Yes" : "No"}
-              </div>
-              <div>
-                <Text strong>League:</Text> {profile?.league? profile.league : 'Not Available'}
-              </div>
-              <div>
-                <Text strong>Streaming Platforms:</Text>{" "}
-                {profile?.streaming_platforms}
-              </div>
+      <Row justify="center" align="middle" style={{ marginTop: 50 }}>
+        <Col xs={22} sm={20} md={16} lg={14} xl={12} xxl={10}>
+          <Card
+            style={{ position: "relative" }}
+            cover={<Avatar className="card-avatar" size={100} src={profile?.avatar} />}
+            loading={isLoading}
+          >
+            <div className="lastOnline">
+              <OnlineStatus lastOnlineTime={profile?.last_online} />
             </div>
-          }
-        />
-      </Card>
+            <Card.Meta
+              title={
+                <>
+                  <Title level={5}>{profile?.username}</Title>
+                  {profile?.name && <Text>({profile.name})</Text>}
+                </>
+              }
+              description={
+                <div>
+                  <div>
+                    <Text strong>Player ID:</Text> {profile?.player_id}
+                  </div>
+                  <div>
+                    <Text strong>Followers:</Text> {profile?.followers}
+                  </div>
+                  <div>
+                    <Text strong>Country:</Text> {country?.name}
+                  </div>
+                  <div>
+                    <Text strong>Joined:</Text> {joinedDate}
+                  </div>
+                  <div>
+                    <Text strong>Status:</Text> {profile?.status}
+                  </div>
+                  <div>
+                    <Text strong>Streamer:</Text> {profile?.is_streamer ? "Yes" : "No"}
+                  </div>
+                  <div>
+                    <Text strong>Verified:</Text> {profile?.verified ? "Yes" : "No"}
+                  </div>
+                  <div>
+                    <Text strong>League:</Text> {profile?.league ? profile.league : 'Not Available'}
+                  </div>
+                  <div>
+                    <Text strong>Streaming Platforms:</Text>{" "}
+                    {profile?.streaming_platforms}
+                  </div>
+                </div>
+              }
+            />
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };
